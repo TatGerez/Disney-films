@@ -1,38 +1,19 @@
 <?php
 
+require_once('./servicios/datos_peliculas.php');
+
 $SesionActiva = false;
-$Peliculas = [];
+$Peliculas = obtener_peliculas();
 
 if (isset($_SESSION['user'])) {
-    $SesionActiva = true;
-    $UserActivo = $_SESSION['user'];
+  $SesionActiva = true;
+  $UserActivo = $_SESSION['user'];
 }
 
-if (file_exists("./datos/peliculas.csv")) {
-
-  $archivo = file_get_contents("./datos/peliculas.csv");
-  $renglones = explode("\n", $archivo);
-  $separador = "|";
-
-  if (count($renglones)>1) {
-    
-    $campos = explode($separador, $renglones[0]);
-    $list = [];
-
-    for($i=1; $i<count($renglones); $i=$i+1) {
-      $pelicula_obj=[];
-      $renglon = explode($separador, $renglones[$i]);
-      foreach($campos as $id_array_campo=>$valor_campo) {
-          $pelicula_obj[trim($valor_campo)] = trim($renglon[$id_array_campo]);
-      }
-      $list[] = (object)$pelicula_obj;
-    }
-    $Peliculas = $list;
-
-  }
-
+if (isset($_POST['boton_eliminar'])) {
+  $id_pelicula = $_POST['id_pelicula'];
+  remover_pelicula($id_pelicula);
 }
-
 
 ?>
 <div class="container-fluid m-0 p-0">
@@ -53,8 +34,11 @@ if (file_exists("./datos/peliculas.csv")) {
             <li class="list-group-item">Estreno: <?= $pelicula -> año ?></li>
           </ul>
           <?php if ($SesionActiva) { //si hay una sesion activa muestro el boton "cargar pelicula" ?>
-            <div class="card-footer">        
-              <a href="#" class="btn btn-danger" role="button">Eliminar Pelicula</a>
+            <div class="card-footer">
+              <form method="POST">
+                <input type="text" class="form-control" name="id_pelicula" hidden="true" value="<?= $pelicula -> id ?>">
+                <button type="submit" name="boton_eliminar" class="btn btn-danger">Eliminar Pelicula</button>
+              </form>
             </div>
           <?php } ?>
         </div>

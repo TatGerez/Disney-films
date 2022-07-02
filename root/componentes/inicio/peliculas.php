@@ -35,10 +35,35 @@ if (isset($_POST['boton_eliminar'])) {
           </ul>
           <?php if ($SesionActiva) { //si hay una sesion activa muestro el boton "cargar pelicula" ?>
             <div class="card-footer">
+
               <form method="POST">
+              
+                <!-- Button trigger modal -->
+                <button type="button" name="boton_eliminar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?=$pelicula->id?>">Eliminar Pelicula</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop<?=$pelicula->id?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Estas por eliminar una pelicula</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ¿Estas seguro que deseas eliminar la pelicula <strong> <?= $pelicula -> titulo ?> </strong> ?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="boton_eliminar">Confirmar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <input type="text" class="form-control" name="id_pelicula" hidden="true" value="<?= $pelicula -> id ?>">
-                <button type="submit" name="boton_eliminar" class="btn btn-danger">Eliminar Pelicula</button>
+
               </form>
+
             </div>
           <?php } ?>
         </div>

@@ -35,7 +35,7 @@ function obtener_peliculas() {
 }
 
 function remover_pelicula($id) {
-    echo "id a remover: $id";
+    echo "eliminada pelicula: $id";
 }
 
 ?>

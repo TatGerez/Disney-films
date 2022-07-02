@@ -11,17 +11,21 @@
 
 <?php
 
+//Inicia la sesion de php $_SESSION
 session_start();
 
+//Nombro e inicializo variables en false y en nulo.
 $SesionActiva = false;
 $VerSinIniciar = false;
 $UserActivo = null;
 
+//Si hay algo en $_SESSION['user'] entra
 if (isset($_SESSION['user'])) {
     $SesionActiva = true;
-    $UserActivo = $_SESSION['user'];
+    $UserActivo = $_SESSION['user']; //guarda el usuario en $UserActivo
 }
 
+//Si viene el parametro en la URL 'verSinIniciar' en true entra
 if (isset($_GET['verSinIniciar'])) {
     $VerSinIniciar = true;
 }
@@ -36,14 +40,14 @@ if (isset($_GET['verSinIniciar'])) {
                 <a class="navbar-brand" href="#">Disney Films</a>
                 <div class="d-flex">
                     <div class="container-fluid">
-                        <?php if ($SesionActiva) { ?>
+                        <?php if ($SesionActiva) { //si hay sesion activa, muestro nombre de usuario y boton de "cerrar sesion" ?>
                             <span class="navbar-text text-center">
-                                <?=$UserActivo?>
+                                <?= $UserActivo ?>
                             </span>
                             <a href="/servicios/cerrar_sesion.php" class="btn btn-outline-danger" role="button">Cerrar Sesión</a>
-                        <?php } else if ($VerSinIniciar) { ?>
+                        <?php } else if ($VerSinIniciar) { //si entro en versininiciar muestro boton "iniciar sesion" ?>
                             <a href="index.php" class="btn btn-success" role="button">Iniciar Sesión</a>
-                        <?php } else { ?>
+                        <?php } else { //si no hay sesion y no entro a versinsesion, entonces muestro boton "ver sin iniciar" ?>
                             <a href="index.php?verSinIniciar=true" class="btn btn-info" role="button">Ver sin iniciar</a>
                         <?php } ?>
                     </div>
@@ -53,20 +57,20 @@ if (isset($_GET['verSinIniciar'])) {
     </header>
 
     <div class="container-fluid p-0 pt-5 mt-5">
-
-        <div class="container-fluid p-0 m-0">
-            <?php if ($SesionActiva) { ?>
+        
+        <?php if ($SesionActiva) { //si hay una sesion activa muestro el boton "cargar pelicula" ?>
+            <div class="container-fluid p-0 m-0">
                 <div class="d-flex justify-content-center">
-                    <a href="index.php?verSinIniciar=true" class="btn btn-warning" role="button">Cargar Pelicula</a>
+                    <a href="#" class="btn btn-warning" role="button">Cargar Pelicula</a>
                 </div>
-            <?php } ?>
-        </div>
+            </div>
+        <?php } ?>
 
-        <div class="container-fluid p-0 mt-5">
+        <div class="container-fluid p-0">
             <?php 
-                if ($SesionActiva || $VerSinIniciar) {
+                if ($SesionActiva || $VerSinIniciar) { // si hay una sesion activa o entro a ver sin iniciar muestro peliculas.php
                     include "./componentes/inicio/peliculas.php";
-                } else {
+                } else { // sino muestro login
                     include "./componentes/login/login.php";
                 }
             ?>
@@ -77,6 +81,7 @@ if (isset($_GET['verSinIniciar'])) {
                 <span class="text-muted">Tatiana Agostina Gerez.</span>
             </div>
         </footer>
+
     </div>
 
 </body>

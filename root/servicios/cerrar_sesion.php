@@ -4,5 +4,5 @@
    unset($_SESSION["pass"]);
    session_destroy();
    
-   header('Refresh: 2; URL = /index.php');
+   header("Location: /index.php");
 ?>

@@ -19,15 +19,12 @@ if (isset($_POST['boton_eliminar'])) {
 }
 
 ?>
+
+<?php 
+  include "./componentes/inicio/agregar-pelicula.php";
+?>
+
 <div class="container-fluid m-0 p-0">
-        
-    <?php if ($SesionActiva) { //si hay una sesion activa muestro el boton "cargar pelicula" ?>
-        <div class="container-fluid p-0 m-0">
-            <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-warning" role="button">Cargar Pelicula</a>
-            </div>
-        </div>
-    <?php } ?>
         
     <?php if ($PeliculaEliminada) { ?>
       <div class="row justify-content-md-center m-0 mt-3 p-0">

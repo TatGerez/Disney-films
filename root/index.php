@@ -57,14 +57,6 @@ if (isset($_GET['verSinIniciar'])) {
     </header>
 
     <div class="container-fluid p-0 pt-5 mt-5">
-        
-        <?php if ($SesionActiva) { //si hay una sesion activa muestro el boton "cargar pelicula" ?>
-            <div class="container-fluid p-0 m-0">
-                <div class="d-flex justify-content-center">
-                    <a href="#" class="btn btn-warning" role="button">Cargar Pelicula</a>
-                </div>
-            </div>
-        <?php } ?>
 
         <div class="container-fluid p-0">
             <?php 

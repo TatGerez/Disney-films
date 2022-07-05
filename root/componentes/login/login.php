@@ -4,24 +4,26 @@
 $ErrorEnLogin = false;
 $MensajeError = '';
 
+//si boton_iniciar es apretado entra
 if (isset($_POST['boton_iniciar'])) {
 
+  //agarra los valores de los input
   $input_user = $_POST['user'];
   $input_pass = $_POST['pass'];
 
-  if ($input_user == '') {
+  if ($input_user == '') { //si el usuario es vacio
     $ErrorEnLogin = true;
     $MensajeError = 'Usuario es vacio';
-  } else if ($input_pass == '') {
+  } else if ($input_pass == '') { //si la contraseña es vacia
     $ErrorEnLogin = true;
     $MensajeError = 'Contraseña es vacia';
-  } else {
-    if ($input_user == 'admin' && $input_pass == '123') {
+  } else { //si usuario NO es vacio y contraseña NO es vacia
+    if ($input_user == 'admin' && $input_pass == '123') { //si usuario es "admin" y contraseña es "123" entre
     
-      $_SESSION['user'] = $input_user;
-      header("Location: /index.php");
+      $_SESSION['user'] = $input_user; //guarda el nombre del usuario de la sesion
+      header("Location: /index.php"); //recarga index.php
   
-    } else {
+    } else { // si usuario no es admin o contraseña no es 123 error de datos erroneos.
       $ErrorEnLogin = true;
       $MensajeError = 'Usuario o contraseña incorrecta.';
     }

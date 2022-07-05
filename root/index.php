@@ -25,8 +25,8 @@ if (isset($_SESSION['user'])) {
     $UserActivo = $_SESSION['user']; //guarda el usuario en $UserActivo
 }
 
-//Si viene el parametro en la URL 'verSinIniciar' en true entra
-if (isset($_GET['verSinIniciar'])) {
+//Si viene el parametro en la URL 'VerSinIniciar' en true entra
+if (isset($_GET['VerSinIniciar'])) {
     $VerSinIniciar = true;
 }
 
@@ -48,7 +48,7 @@ if (isset($_GET['verSinIniciar'])) {
                         <?php } else if ($VerSinIniciar) { //si entro en versininiciar muestro boton "iniciar sesion" ?>
                             <a href="index.php" class="btn btn-success" role="button">Iniciar Sesión</a>
                         <?php } else { //si no hay sesion y no entro a versinsesion, entonces muestro boton "ver sin iniciar" ?>
-                            <a href="index.php?verSinIniciar=true" class="btn btn-info" role="button">Ver sin iniciar</a>
+                            <a href="index.php?VerSinIniciar=true" class="btn btn-info" role="button">Ver sin iniciar</a>
                         <?php } ?>
                     </div>
                 </div>

@@ -1,21 +1,16 @@
 <?php
 
-require_once('./servicios/datos_peliculas.php');
+$PeliculaAgregada = false;
 
-$SesionActiva = false;
-$PeliculaEliminada = false;
-$Peliculas = obtener_peliculas();
-
-if (isset($_SESSION['user'])) {
-  $SesionActiva = true;
-  $UserActivo = $_SESSION['user'];
-}
-
-if (isset($_POST['boton_eliminar'])) {
-  $id_pelicula = $_POST['id_pelicula'];
-  remover_pelicula($id_pelicula);
-  $Peliculas = obtener_peliculas();
-  $PeliculaEliminada=true;
+if (isset($_POST['boton_agregar'])) {
+    $titulo = $_POST['titulo'];
+    $genero = $_POST['genero'];
+    $año = $_POST['año'];
+    $descripcion = $_POST['descripcion'];
+    $urlimagen = $_POST['urlimagen'];
+    agregar_pelicula($titulo, $genero, $año, $descripcion, $urlimagen);
+    $Peliculas = obtener_peliculas();
+    $PeliculaAgregada=true;
 }
 
 ?>
@@ -27,6 +22,18 @@ if (isset($_POST['boton_eliminar'])) {
             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModalAgregarPelicula">Cargar Pelicula</button>
         </div>
     </div>
+    
+    <?php if ($PeliculaAgregada) { ?>
+      <div class="row justify-content-md-center m-0 mt-3 p-0">
+        <div class="container-fluid col-md-4">
+        
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Listo!</strong> La pelicula fue agregada con exito.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
 
     <div class="modal fade" id="exampleModalAgregarPelicula" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -35,32 +42,32 @@ if (isset($_POST['boton_eliminar'])) {
                     <h5 class="modal-title" id="exampleModalLabel">Nueva Pelicula</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form method="POST">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="titulo" class="col-form-label">Titulo</label>
-                            <input type="text" class="form-control" id="titulo">
+                            <input type="text" class="form-control" name="titulo" required>
                         </div>
                         <div class="mb-3">
                             <label for="genero" class="col-form-label">Genero</label>
-                            <input type="text" class="form-control" id="genero">
+                            <input type="text" class="form-control" name="genero" required>
                         </div>
                         <div class="mb-3">
                             <label for="año" class="col-form-label">Año</label>
-                            <input type="text" class="form-control" id="año">
+                            <input type="text" class="form-control" name="año" required>
                         </div>
                         <div class="mb-3">
                             <label for="descripcion" class="col-form-label">Descripción</label>
-                            <textarea class="form-control" id="descripcion"></textarea>
+                            <textarea class="form-control" name="descripcion" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="urlimagen" class="col-form-label">URL de Imagen</label>
-                            <textarea class="form-control" id="urlimagen"></textarea>
+                            <textarea class="form-control" name="urlimagen" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Confirmar</button>
+                        <button type="submit" class="btn btn-primary" name="boton_agregar" data-bs-dismiss="modal">Confirmar</button>
                     </div>
                 </form>
             </div>

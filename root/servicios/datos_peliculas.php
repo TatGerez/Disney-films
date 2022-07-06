@@ -74,9 +74,31 @@ function remover_pelicula($id) {
 
 }
 
-function agregar_pelicula($titulo, $descripcion, $genero, $año, $url_imagen) {
+function agregar_pelicula($titulo, $genero, $año, $descripcion, $urlimagen) {
 
-    
+    if (file_exists($GLOBALS["file_name"])) {
+
+        $archivo = file_get_contents($GLOBALS["file_name"]);
+        $renglones = explode($GLOBALS["new_line"], $archivo);
+        
+        if (count($renglones)>1) {
+
+            $ultima_fila = count($renglones)-1;
+            $renglon = explode($GLOBALS["separador"], $renglones[$ultima_fila]);
+            $siguiente_id = $renglon[0]+1;
+
+            $nueva_pelicula = $siguiente_id.$GLOBALS["separador"]
+                                .$titulo.$GLOBALS["separador"]
+                                .$descripcion.$GLOBALS["separador"]
+                                .$genero.$GLOBALS["separador"]
+                                .$año.$GLOBALS["separador"]
+                                .$urlimagen;
+
+            file_put_contents($GLOBALS["file_name"], $GLOBALS["new_line"].$nueva_pelicula, FILE_APPEND);
+
+        }
+
+    }
 
 }
 
